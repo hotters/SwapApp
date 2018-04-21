@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.firstListKeys = Object.keys(this.firstList);
-		console.log('[TO RIGHT]', this.firstList, this.secondList, this.secondListKeys);
+		// console.log('[TO RIGHT]', this.firstList, this.secondList, this.secondListKeys);
 	}
 
 	selectItem(id: string, type: number) {
