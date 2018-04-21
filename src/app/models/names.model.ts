@@ -1,7 +1,4 @@
-export interface Names {
-	[key: number]: Name;
-}
-
 export interface Name {
+	id: string;
 	name: string;
 }

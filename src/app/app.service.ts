@@ -13,16 +13,13 @@ export class AppService {
 	) { }
 
 	getNames() {
-		return this.http.get('assets/names.json')
-		.pipe(
+		return this.http.get<Array<Name>>('assets/names.json').pipe(
 			map(names => {
 				const result = {};
 				names.forEach(item => result[item.id] = {name: item.name});
-				result.keys = Object.keys(result);
 				return result;
 			})
-		)
-		;
+		);
 	}
 
 }

@@ -1,18 +1,22 @@
 <div class="wrap">
 	<div class="container">
+		<input type="text" #firstInput (input)="filter(firstInput.value, 1)">
 		<ul class="list">
-			<li *ngFor="let key of firstList?.keys" (click)="selectItem(key)" [ngClass]="{selected: firstList[key].selected}">
+			<li class="item" *ngFor="let key of firstListKeys" (click)="selectItem(key, 1)" [ngClass]="{selected: firstList[key].selected}" draggable="true">
 				{{key}} {{firstList[key].name}}
 			</li>
 		</ul>
 	</div>
-	<div class="container">
+	<div class="buttons">
 		<button class="button left" (click)="toLeft()">←</button>
 		<button class="button right" (click)="toRight()">→</button>
 	</div>
 	<div class="container">
+		<input type="text" #secondInput (input)="filter(secondInput.value, 2)">
 		<ul class="list">
-			<li *ngFor="let item of secondList" (click)="selectItem(item.id)">{{item.name}}</li>
+			<li class="item" *ngFor="let key of secondListKeys" (click)="selectItem(key, 2)" [ngClass]="{selected: secondList[key].selected}" draggable="true">
+				{{key}} {{secondList[key].name}}
+			</li>
 		</ul>
 	</div>
 </div>
