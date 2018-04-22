@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Name } from './models/names.model';
 import { AppService } from './app.service';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.sass']
+	styleUrls: ['./app.component.sass'],
 })
 export class AppComponent implements OnInit {
 
@@ -15,12 +15,12 @@ export class AppComponent implements OnInit {
 	secondList = {};
 	secondListKeys = [];
 
+	dragEnter = false;
+	draggable = false;
+
 	constructor(
 		private service: AppService,
-	) {
-
-
-	}
+	) {	}
 
 	ngOnInit() {
 		this.service.getNames().subscribe(names => {
@@ -66,15 +66,66 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	filter(value: string, type: number) {
-		console.log(value, type);
+	filter(str: string, type: number) {
+		console.log(str, type);
+		let arr, keys;
 		switch (type) {
 			case 1:
+				arr = this.firstList;
+				keys = this.firstListKeys;
 				break;
-
 			case 2:
+				arr = this.secondList;
+				keys = this.secondListKeys;
 				break;
 		}
+
+		keys.forEach(i => {
+			if (arr[i].name.toLowerCase().indexOf(str.toLowerCase()) > -1) {
+				arr[i].hide = false;
+			} else {
+				arr[i].hide = true;
+			}
+		});
 	}
+
+
+
+
+	onDragStart(e) {
+		console.log('[DRAG START]', e);
+		e.dataTransfer.setData();
+	}
+
+	onDragEnter(e) {
+		this.dragEnter = true;
+		console.log('[DRAG ENTER]', e);
+		// return false;
+	}
+
+	onDragLeave(e) {
+		this.dragEnter = false;
+		console.log('[DRAG LEAVE]', e);
+		// return false;
+	}
+
+	onDrop(e) {
+		e.preventDefault();
+		this.dragEnter = false;
+		console.log('[DROP]', e);
+		return false;
+	}
+
+	onDragOver(e) {
+		e.preventDefault();
+		return false;
+	}
+
+	onDragEnd(e) {
+		console.log('[DRAG END]', e);
+		return false;
+	}
+
+
 
 }
