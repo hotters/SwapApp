@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 	secondListKeys = [];
 
 	dragEnter = false;
-	draggable = false;
 
 	constructor(
 		private service: AppService,
@@ -89,13 +88,8 @@ export class AppComponent implements OnInit {
 		});
 	}
 
-	onDragStart(e) {
-		console.log('[DRAG START]', e);
-	}
-
 	onDragOver(e) {
 		e.preventDefault();
-		console.log('[DRAGOVER]');
 		this.dragEnter = true;
 		return false;
 	}
@@ -114,24 +108,5 @@ export class AppComponent implements OnInit {
 		}
 		return false;
 	}
-
-	onDragEnter(e) {
-		this.dragEnter = true;
-		console.log('[DRAG ENTER]', e);
-		// return false;
-	}
-
-	onDragLeave(e) {
-		this.dragEnter = false;
-		console.log('[DRAG LEAVE]', e);
-		// return false;
-	}
-
-	// onDragEnd(e) {
-	// 	console.log('[DRAG END]', e);
-	// 	return false;
-	// }
-
-
 
 }

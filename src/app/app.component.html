@@ -1,7 +1,7 @@
 <div class="wrap">
 	<div class="container" (drop)="onDrop($event, 1)" (dragover)="onDragOver($event)" [ngClass]="{dragenter: dragEnter}">
 		<input class="input" type="text" #firstInput (input)="filter(firstInput.value, 1)">
-		<ul class="list" (dragstart)="onDragStart($event)">
+		<ul class="list">
 			<li class="item"
 				*ngFor="let key of firstListKeys"
 				(click)="selectItem(key, 1)"
@@ -19,7 +19,7 @@
 	</div>
 	<div class="container" (drop)="onDrop($event, 2)" (dragover)="onDragOver($event)" [ngClass]="{dragenter: dragEnter}">
 		<input class="input" type="text" #secondInput (input)="filter(secondInput.value, 2)">
-		<ul class="list" (dragstart)="onDragStart($event)" >
+		<ul class="list">
 			<li class="item"
 				*ngFor="let key of secondListKeys"
 				(click)="selectItem(key, 2)"
