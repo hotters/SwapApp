@@ -1,15 +1,16 @@
 <div class="wrap">
 	<div class="container">
 		<input type="text" #firstInput (input)="filter(firstInput.value, 1)">
-		<ul class="list" [dragula]='"bag-one"' [dragulaModel]='firstListKeys'>
+		<ul class="list" (drop)="onDrop($event, 1)" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" [ngClass]="{dragenter: dragEnter}">
 			<li class="item"
 				*ngFor="let key of firstListKeys"
-				(click)="selectItem(key, 1); draggable = true"
-				[ngClass]="{selected: firstList[key].selected, hide: firstList[key].hide}">
-				{{key}} {{firstList[key].name}}
+				(click)="selectItem(key, 1)"
+				[ngClass]="{selected: firstList[key].selected, hide: firstList[key].hide}"
+				[draggable]="firstList[key].selected">
+				{{firstList[key].name}}
 			</li>
-			<pre>{{firstList | json}}</pre>
-			<pre>{{firstListKeys | json}}</pre>
+			<!-- <pre>{{firstList | json}}</pre>
+			<pre>{{firstListKeys | json}}</pre> -->
 		</ul>
 	</div>
 	<div class="buttons">
@@ -18,18 +19,16 @@
 	</div>
 	<div class="container">
 		<input type="text" #secondInput (input)="filter(secondInput.value, 2)">
-		<ul class="list" [dragula]='"bag-one"' [dragulaModel]='secondListKeys'>
+		<ul class="list" (drop)="onDrop($event, 2)" (dragstart)="onDragStart($event)" (dragover)="onDragOver($event)" [ngClass]="{dragenter: dragEnter}">
 			<li class="item"
 				*ngFor="let key of secondListKeys"
 				(click)="selectItem(key, 2)"
 				[ngClass]="{selected: secondList[key].selected, hide: secondList[key].hide}"
-				draggable="true">
-				{{key}} {{secondList[key].name}}
+				[draggable]="secondList[key].selected">
+				{{secondList[key].name}}
 			</li>
-			<pre>{{secondList | json}}</pre>
-			<pre>{{secondListKeys | json}}</pre>
+			<!-- <pre>{{secondList | json}}</pre>
+			<pre>{{secondListKeys | json}}</pre> -->
 		</ul>
 	</div>
 </div>
-
-

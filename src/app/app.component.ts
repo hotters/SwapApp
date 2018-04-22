@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		private service: AppService,
-	) {	}
+	) { }
 
 	ngOnInit() {
 		this.service.getNames().subscribe(names => {
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.firstListKeys = Object.keys(this.firstList);
-		// console.log('[TO RIGHT]', this.firstList, this.secondList, this.secondListKeys);
+		console.log('[TO RIGHT]', this.firstList, this.secondList, this.secondListKeys);
 	}
 
 	selectItem(id: string, type: number) {
@@ -89,12 +89,30 @@ export class AppComponent implements OnInit {
 		});
 	}
 
-
-
-
 	onDragStart(e) {
 		console.log('[DRAG START]', e);
-		e.dataTransfer.setData();
+	}
+
+	onDragOver(e) {
+		e.preventDefault();
+		console.log('[DRAGOVER]');
+		this.dragEnter = true;
+		return false;
+	}
+
+	onDrop(e, type) {
+		e.preventDefault();
+		this.dragEnter = false;
+		console.log('[DROP]', type);
+		switch (type) {
+			case 1:
+				this.toLeft();
+				break;
+			case 2:
+				this.toRight();
+				break;
+		}
+		return false;
 	}
 
 	onDragEnter(e) {
@@ -109,22 +127,10 @@ export class AppComponent implements OnInit {
 		// return false;
 	}
 
-	onDrop(e) {
-		e.preventDefault();
-		this.dragEnter = false;
-		console.log('[DROP]', e);
-		return false;
-	}
-
-	onDragOver(e) {
-		e.preventDefault();
-		return false;
-	}
-
-	onDragEnd(e) {
-		console.log('[DRAG END]', e);
-		return false;
-	}
+	// onDragEnd(e) {
+	// 	console.log('[DRAG END]', e);
+	// 	return false;
+	// }
 
 
 
