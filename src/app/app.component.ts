@@ -30,8 +30,10 @@ export class AppComponent implements OnInit {
 	}
 
 	toLeft() {
+		let movedItems = [];
 		this.secondListKeys.forEach(i => {
 			if (this.secondList[i].selected) {
+				movedItems.push(this.secondList[i].name);
 				this.firstList[i] = this.secondList[i];
 				this.firstList[i].selected = false;
 				delete this.secondList[i];
@@ -39,11 +41,14 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.secondListKeys = Object.keys(this.secondList);
+		alert(movedItems);
 	}
 
 	toRight() {
+		let movedItems = [];
 		this.firstListKeys.forEach(i => {
 			if (this.firstList[i].selected) {
+				movedItems.push(this.firstList[i].name);
 				this.secondList[i] = this.firstList[i];
 				this.secondList[i].selected = false;
 				delete this.firstList[i];
@@ -51,7 +56,7 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.firstListKeys = Object.keys(this.firstList);
-		console.log('[TO RIGHT]', this.firstList, this.secondList, this.secondListKeys);
+		alert(movedItems);
 	}
 
 	selectItem(id: string, type: number) {
